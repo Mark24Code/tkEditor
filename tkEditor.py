@@ -1,4 +1,14 @@
-from tkinter import Tk, Menu, Frame, Button, LEFT, X, NO, Label, SUNKEN, W, BOTTOM, Text, YES, BOTH, Scrollbar, RIGHT, Y
+from tkinter import Tk, Menu, Frame, Button, Scrollbar, Label, Text, messagebox, LEFT, RIGHT, X, Y, W, BOTH, BOTTOM, \
+    YES, NO, SUNKEN
+
+
+def authorDef():
+    messagebox.showinfo('作者信息', 'Mark24Code')
+
+
+def aboutDef():
+    messagebox.showinfo('版本信息', 'MIT LICENSE  Copyrighht. @2017 All rights reserved.')
+
 
 root = Tk()
 root.title = 'tkEditor'
@@ -29,8 +39,8 @@ editmenu.add_command(label="全选", accelerator="Ctrl+A")
 menubar.add_cascade(label="编辑", menu=editmenu)
 
 aboutmenu = Menu(menubar)
-aboutmenu.add_command(label="作者")
-aboutmenu.add_command(label="版权")
+aboutmenu.add_command(label="作者", command=authorDef)
+aboutmenu.add_command(label="版权", command=aboutDef)
 menubar.add_cascade(label="关于", menu=aboutmenu)
 
 # toolbar
@@ -46,17 +56,20 @@ toolbar.pack(expand=NO, fill=X)
 statusbar = Label(root, text="Ln0", bd=1, relief=SUNKEN, anchor=W)
 statusbar.pack(side=BOTTOM, fill=X)
 
-# textarea
+# textarea & scroll
 
 lnlabel = Label(root, width=2, bg="#6A737D", fg="#FFFFFF")
 lnlabel.pack(side=LEFT, fill=Y)
 
 textarea = Text(root, undo=True)
-textarea.pack(fill=BOTH,expand=YES)
+textarea.pack(fill=BOTH, expand=YES)
 
 scroll = Scrollbar(textarea)
 textarea.config(yscrollcommand=scroll.set)
 scroll.config(command=textarea.yview)
 scroll.pack(side=RIGHT, fill=Y)
+
+
+# main app
 
 root.mainloop()
